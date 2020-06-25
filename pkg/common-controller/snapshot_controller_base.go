@@ -211,7 +211,7 @@ func (ctrl *csiSnapshotCommonController) snapshotWorker() {
 			return false
 		}
 		snapshot, err := ctrl.snapshotLister.VolumeSnapshots(namespace).Get(name)
-		if err == nil {
+		if err == nil && snapshot != nil {
 			// The volume snapshot still exists in informer cache, the event must have
 			// been add/update/sync
 			newSnapshot, err := ctrl.checkAndUpdateSnapshotClass(snapshot)
